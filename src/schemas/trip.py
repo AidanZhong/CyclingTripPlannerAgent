@@ -52,7 +52,7 @@ class DayPlan:
     end_location: str
     distance_km: float
     elevation_gain_m: float
-    difficulty: str
+    terrain_difficulty: str
     weather_summary: str
     stay: str
 
