@@ -44,3 +44,22 @@ class TripStateSummary:
     accommodation_primary: str
     accommodation_alt: str
     alt_every_n_nights: int
+
+
+class DayPlan:
+    day: int
+    start_location: str
+    end_location: str
+    distance_km: float
+    elevation_gain_m: float
+    difficulty: str
+    weather_summary: str
+    stay: str
+
+
+class TripPlan:
+    title: str
+    days: list[DayPlan]
+    overall_distance_km: float
+    overall_elevation_gain_m: float
+    overall_notes: str
