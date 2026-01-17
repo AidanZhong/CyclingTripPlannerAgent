@@ -7,3 +7,6 @@ Created on 17/01/2026 21:30
 @filename: configuration
 """
 similarity_threshold = 0.2
+easy_elevation_threshold = 0
+medium_elevation_threshold = 100
+hard_elevation_threshold = 200
