@@ -17,7 +17,6 @@ class ChatRequest:
 class ChatResponse:
     session_id: str
     reply: str
-    debug_trace: DebugTrace | None
 
 
 class DebugTrace:
