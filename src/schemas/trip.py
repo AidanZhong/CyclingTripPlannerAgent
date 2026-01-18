@@ -15,6 +15,13 @@ class AccommodationType(str, Enum):
     hostel = "hostel"
     other = "other"
 
+    @classmethod
+    def from_string(cls, value: str) -> "AccommodationType":
+        try:
+            return cls(value.lower())
+        except ValueError:
+            return cls.other
+
 
 class TripPreferences:
     origin: str | None
