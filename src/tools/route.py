@@ -6,22 +6,12 @@ Created on 16/01/2026 22:26
 @project: CyclingTripPlannerAgent
 @filename: route
 """
+import math
 from typing import Dict, Tuple
 
+from src.demo_data import CITY_DATA
 from src.schemas.tools import GetRouteRequest, GetRouteResponse, Waypoint
-
-# demo
-ROUTES: Dict[Tuple[str, str], dict] = {
-    ("amsterdam", "copenhagen"): {
-        "total_distance_km": 650,
-        "waypoints": ["Amsterdam", "Utrecht", "Arnhem", "Osnabrück", "Bremen", "Hamburg", "Lübeck", "Rostock", "Malmö",
-                      "Copenhagen"],
-    },
-    ("london", "paris"): {
-        "total_distance_km": 460,
-        "waypoints": ["London", "Canterbury", "Dover", "Calais", "Amiens", "Paris"],
-    },
-}
+from src.utils.path_finding import dijkstra_path_finding, get_total_distance
 
 
 def get_route(request: GetRouteRequest) -> GetRouteResponse:
@@ -29,17 +19,20 @@ def get_route(request: GetRouteRequest) -> GetRouteResponse:
     if not origin_key or not destination_key:
         raise ValueError("Origin and destination must be specified")
 
-    key = (origin_key, destination_key)
-    if key in ROUTES:
-        data = ROUTES[key]
-        total = data["total_distance_km"]
-        waypoints = [Waypoint(name=w) for w in data["waypoints"]]
-    else:
+    path = dijkstra_path_finding(origin_key, destination_key)
+    if not path:
         raise ValueError("No route found between these locations")
 
-    estimated_days = max(1, (total // request.daily_distance_km))
+    waypoints = [
+        Waypoint(name=c, lat=CITY_DATA[c]['lat'], lon=CITY_DATA[c]['lon'])
+        for c in path
+    ]
+
+    total_km = get_total_distance(path)
+
+    estimated_days = max(1, math.ceil(total_km / request.daily_distance_km))
     return GetRouteResponse(
-        total_distance_km=total,
+        total_distance_km=total_km,
         estimated_days=estimated_days,
         waypoints=waypoints
     )
