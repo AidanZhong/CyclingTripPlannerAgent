@@ -9,6 +9,8 @@ Created on 16/01/2026 22:26
 from enum import Enum
 from typing import Optional
 
+from pydantic import BaseModel
+
 
 class AccommodationType(str, Enum):
     camping = "camping"
@@ -24,9 +26,9 @@ class AccommodationType(str, Enum):
             return cls.other
 
 
-class AccommodationPreference:
+class AccommodationPreference(BaseModel):
     primary: AccommodationType
-    alt: Optional["AccommodationPreference"] = None
+    alt: Optional["AccommodationType"] = None
     alt_every_n_nights: Optional[int] = None
     '''
         rules:
@@ -35,15 +37,15 @@ class AccommodationPreference:
     '''
 
 
-class TripPreferences:
+class TripPreferences(BaseModel):
     origin: Optional[str] = None
     destination: Optional[str] = None
     start_month: Optional[str] = None
-    daily_distance_km: Optional[str] = None
+    daily_distance_km: Optional[float] = None
     accommodation: Optional[AccommodationPreference] = None
 
 
-class TripStateSummary:
+class TripStateSummary(BaseModel):
     # for API response
     origin: str
     destination: str
@@ -54,7 +56,7 @@ class TripStateSummary:
     alt_every_n_nights: int
 
 
-class DayPlan:
+class DayPlan(BaseModel):
     day: int
     start_location: str
     end_location: str
@@ -65,7 +67,7 @@ class DayPlan:
     stay: str
 
 
-class TripPlan:
+class TripPlan(BaseModel):
     title: str
     days: list[DayPlan]
     overall_distance_km: float

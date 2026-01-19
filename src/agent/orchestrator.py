@@ -16,7 +16,7 @@ from src.agent.state import get_or_create_state, append_history
 from src.demo_data import VECTORIZE, CORPUS_VECS, INTENT_LABELS
 from src.schemas.api import ChatResponse
 from src.schemas.tools import GetRouteRequest
-from src.schemas.trip import TripPreferences, AccommodationPreference
+from src.schemas.trip import TripPreferences, AccommodationPreference, AccommodationType
 from src.tools.route import get_route
 from src.utils.intent_matching import classify_message
 
@@ -116,7 +116,7 @@ def update_preferences_from_text(text: str, old_preference: TripPreferences):
         accommodation = extract_primary_accommodation(text)
         if accommodation:
             if p.accommodation is None:
-                p.accommodation = AccommodationPreference(primary=accommodation)
+                p.accommodation = AccommodationPreference(primary=AccommodationType.from_string(accommodation))
             else:
                 p.accommodation.primary = accommodation
 
@@ -124,7 +124,9 @@ def update_preferences_from_text(text: str, old_preference: TripPreferences):
         pattern = extract_every_n_pattern(text)
         if pattern:
             primary, alt, n = pattern
-            p.accommodation = AccommodationPreference(primary=primary, alt=alt, alt_every_n_nights=n)
+            p.accommodation = AccommodationPreference(primary=AccommodationType.from_string(primary),
+                                                      alt=AccommodationType.from_string(alt),
+                                                      alt_every_n_nights=n)
     return p
 
 

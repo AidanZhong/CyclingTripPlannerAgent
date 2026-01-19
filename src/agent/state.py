@@ -6,26 +6,29 @@ Created on 16/01/2026 22:25
 @project: CyclingTripPlannerAgent
 @filename: state
 """
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Optional
 
 from src.schemas.trip import TripPreferences, TripPlan
 
 
+@dataclass
 class Message:
     role: str
     content: str
 
 
+@dataclass
 class SessionState:
-    preferences: TripPreferences
-    history: list[Message]
+    preferences: TripPreferences = field(default_factory=TripPreferences)
+    history: list[Message] = field(default_factory=list)
     last_plan: Optional[TripPlan] = None
-    last_tool_results: dict
-    updated_at: datetime
+    last_tool_results: dict = field(default_factory=dict)
+    updated_at: datetime = field(default_factory=datetime.now)
 
 
-SESSION_STORE: dict[str, "SessionState"]  # temporary in-memory store
+SESSION_STORE: dict[str, "SessionState"] = {}  # temporary in-memory store
 
 
 def get_or_create_state(session_id) -> SessionState:
@@ -38,7 +41,5 @@ def get_or_create_state(session_id) -> SessionState:
 
 
 def append_history(state, role, content):
-    msg = Message()
-    msg.role = role
-    msg.content = content
-    SESSION_STORE[state].history.append(msg)
+    msg = Message(role=role, content=content)
+    state.history.append(msg)

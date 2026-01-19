@@ -6,11 +6,13 @@ Created on 16/01/2026 22:26
 @project: CyclingTripPlannerAgent
 @filename: api
 """
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class ChatRequest(BaseModel):
-    session_id: str
+    session_id: Optional[str] = None
     message: str
     debug: bool = False
 

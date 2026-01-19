@@ -6,8 +6,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "I want to cycle from Amsterdam to Copenhagen. I can do around 100km a day, prefer camping but want a hostel every 4th night. Traveling in June.",
-  "session_id": null
+  "message": "I want to cycle from Amsterdam to Copenhagen. I can do around 100km a day, prefer camping but want a hostel every 4th night. Traveling in June."
 }
 
 ###

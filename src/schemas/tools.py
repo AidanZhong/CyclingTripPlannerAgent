@@ -8,63 +8,65 @@ Created on 16/01/2026 22:27
 """
 from typing import Optional
 
+from pydantic import BaseModel
+
 from src.schemas.trip import AccommodationType
 
 
 # -------Route--------
-class GetRouteRequest:
+class GetRouteRequest(BaseModel):
     origin: str
     destination: str
     daily_distance_km: float
 
 
-class GetRouteResponse:
+class GetRouteResponse(BaseModel):
     total_distance_km: float
     estimation_days: int
     waypoints: list["Waypoint"]
 
 
-class Waypoint:
+class Waypoint(BaseModel):
     name: str
     lat: Optional[float] = None
     lon: Optional[float] = None
 
 
 # -------Accommodation--------
-class FindAccommodationRequest:
+class FindAccommodationRequest(BaseModel):
     near: str
     type: AccommodationType
     limit: int = 3
 
 
-class AccommodationOption:
+class AccommodationOption(BaseModel):
     name: str
     type: AccommodationType
     approx_price_per_night: Optional[float] = None
 
 
-class FindAccommodationResponse:
+class FindAccommodationResponse(BaseModel):
     results: list[AccommodationOption]
 
 
 # -------Weather--------
-class GetWeatherRequest:
+class GetWeatherRequest(BaseModel):
     location: str
     month: str
 
 
-class GetWeatherResponse:
+class GetWeatherResponse(BaseModel):
     avg_high_temp_c: float
     avg_low_temp_c: float
     raining_days_estimate: int
 
 
 # -------Elevation--------
-class GetElevationProfileRequest:
+class GetElevationProfileRequest(BaseModel):
     origin: str
     destination: str
 
 
-class GetElevationProfileResponse:
+class GetElevationProfileResponse(BaseModel):
     elevation_gain_m: float
-    difficulty_rating: float
+    difficulty_rating: str

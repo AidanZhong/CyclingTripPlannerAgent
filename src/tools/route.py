@@ -33,6 +33,6 @@ def get_route(request: GetRouteRequest) -> GetRouteResponse:
     estimated_days = max(1, math.ceil(total_km / request.daily_distance_km))
     return GetRouteResponse(
         total_distance_km=total_km,
-        estimated_days=estimated_days,
+        estimation_days=estimated_days,
         waypoints=waypoints
     )
