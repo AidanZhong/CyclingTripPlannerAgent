@@ -48,7 +48,7 @@ def build_trip_plan(preferences: TripPreferences, route_response: GetRouteRespon
         total_gain += gain
 
         weather = get_weather_data(GetWeatherRequest(location=to_wp.name, month=preferences.start_month))
-        weather_summary = f"Avg {getattr(weather, 'avg_high_c', '?')}°C/{getattr(weather, 'avg_low_c', '?')}°C"
+        weather_summary = f"Avg {getattr(weather, 'avg_high_temp_c', '?')}°C/{getattr(weather, 'avg_low_temp_c', '?')}°C"
 
         stay_type = get_accommodation_type_for_specific_night(preferences, day)
         accommodation = find_accommodation(FindAccommodationRequest(near=to_wp.name, limit=3, type=stay_type))
@@ -66,7 +66,7 @@ def build_trip_plan(preferences: TripPreferences, route_response: GetRouteRespon
             stay=stay_summary
         ))
 
-    title = f"{preferences.origin} → {preferences.destination} ({preferences.month})"
+    title = f"{preferences.origin} → {preferences.destination} ({preferences.start_month})"
     return TripPlan(
         title=title,
         days=day_plans,

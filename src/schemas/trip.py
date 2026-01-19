@@ -72,4 +72,3 @@ class TripPlan(BaseModel):
     days: list[DayPlan]
     overall_distance_km: float
     overall_elevation_gain_m: float
-    overall_notes: str

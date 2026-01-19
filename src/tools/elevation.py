@@ -12,8 +12,8 @@ from src.utils.path_finding import dijkstra_path_finding, get_total_elevation_ga
 
 
 def get_elevation_profile(req:GetElevationProfileRequest) -> GetElevationProfileResponse:
-    origin = req.origin.lower()
-    destination = req.destination.lower()
+    origin = req.origin
+    destination = req.destination
 
     path = dijkstra_path_finding(origin, destination)
     if not path:

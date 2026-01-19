@@ -22,7 +22,7 @@ def render_trip_plan(trip_plan: TripPlan) -> str:
     for d in trip_plan.days:
         header = f"Day {d.day}: {d.start_location} -> {d.end_location}"
         if d.distance_km is not None:
-            header += f" ( - {d.distance_km:.2f} km)"
+            header += f" | {d.distance_km:.2f} km"
         lines.append(header)
 
         sub = []

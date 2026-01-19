@@ -46,7 +46,7 @@ class AccommodationOption(BaseModel):
 
 
 class FindAccommodationResponse(BaseModel):
-    results: list[AccommodationOption]
+    results: list[AccommodationOption] = []
 
 
 # -------Weather--------

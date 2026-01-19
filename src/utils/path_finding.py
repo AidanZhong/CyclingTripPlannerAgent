@@ -25,8 +25,8 @@ def get_distance_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float
 
 @cache
 def distance_between_city(city1: str, city2: str):
-    lat1, lon1, elev1 = CITY_DATA[city1]
-    lat2, lon2, elev2 = CITY_DATA[city2]
+    lat1, lon1, elev1 = CITY_DATA[city1].values()
+    lat2, lon2, elev2 = CITY_DATA[city2].values()
     return get_distance_km(lat1, lon1, lat2, lon2)
 
 
@@ -77,5 +77,5 @@ def get_total_distance(path: list[str]):
 def get_total_elevation_gain(path: list[str]):
     total = 0.0
     for i in range(len(path) - 1):
-        total += CITY_DATA[path[i + 1]][2] - CITY_DATA[path[i]][2]
+        total += CITY_DATA[path[i + 1]]['elevation_m'] - CITY_DATA[path[i]]['elevation_m']
     return total

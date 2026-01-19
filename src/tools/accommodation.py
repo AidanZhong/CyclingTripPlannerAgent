@@ -15,10 +15,12 @@ def find_accommodation(req: FindAccommodationRequest) -> FindAccommodationRespon
     res = FindAccommodationResponse()
     for accommodation_type in demo_accommodation_data[req.near]:
         for accommodation in demo_accommodation_data[req.near][accommodation_type]:
+            price = BASE_PRICE[accommodation_type] if accommodation_type in BASE_PRICE else BASE_PRICE[
+                accommodation_type.rstrip('s')]
             res.results.append(AccommodationOption(
                 name=accommodation,
                 type=AccommodationType.from_string(accommodation_type),
-                approx_price_per_night=BASE_PRICE[accommodation_type]
+                approx_price_per_night=price
             ))
             if res.results.__len__() >= req.limit:
                 break

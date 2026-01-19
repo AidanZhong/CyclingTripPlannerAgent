@@ -15,7 +15,7 @@ from src.utils.path_finding import dijkstra_path_finding, get_total_distance
 
 
 def get_route(request: GetRouteRequest) -> GetRouteResponse:
-    origin_key, destination_key = request.origin.lower(), request.destination.lower()
+    origin_key, destination_key = request.origin, request.destination
     if not origin_key or not destination_key:
         raise ValueError("Origin and destination must be specified")
 

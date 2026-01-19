@@ -53,7 +53,7 @@ def classify_message(text: str, vectorize, corpus_vecs, labels, threshold=simila
     score.sort(reverse=True, key=lambda x: x[0])
 
     intents = set()
-    for s, lab in score[:5]:
+    for s, lab in score[:10]:
         if s >= threshold:
             intents.add(lab)
     return intents
