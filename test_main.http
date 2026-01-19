@@ -1,11 +1,13 @@
 # Test your FastAPI endpoints
-
-GET http://127.0.0.1:8000/
-Accept: application/json
-
 ###
 
-GET http://127.0.0.1:8000/hello/User
+POST http://127.0.0.1:8080/chat
+Content-Type: application/json
 Accept: application/json
+
+{
+  "message": "I want to cycle from Amsterdam to Copenhagen. I can do around 100km a day, prefer camping but want a hostel every 4th night. Traveling in June.",
+  "session_id": null
+}
 
 ###

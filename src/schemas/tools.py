@@ -6,6 +6,8 @@ Created on 16/01/2026 22:27
 @project: CyclingTripPlannerAgent
 @filename: tools
 """
+from typing import Optional
+
 from src.schemas.trip import AccommodationType
 
 
@@ -19,13 +21,13 @@ class GetRouteRequest:
 class GetRouteResponse:
     total_distance_km: float
     estimation_days: int
-    waypoints: list[Waypoint]
+    waypoints: list["Waypoint"]
 
 
 class Waypoint:
     name: str
-    lat: float | None = None
-    lon: float | None = None
+    lat: Optional[float] = None
+    lon: Optional[float] = None
 
 
 # -------Accommodation--------
@@ -38,7 +40,7 @@ class FindAccommodationRequest:
 class AccommodationOption:
     name: str
     type: AccommodationType
-    approx_price_per_night: float | None = None
+    approx_price_per_night: Optional[float] = None
 
 
 class FindAccommodationResponse:

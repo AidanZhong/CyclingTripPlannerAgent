@@ -7,6 +7,7 @@ Created on 16/01/2026 22:26
 @filename: trip
 """
 from enum import Enum
+from typing import Optional
 
 
 class AccommodationType(str, Enum):
@@ -23,23 +24,23 @@ class AccommodationType(str, Enum):
             return cls.other
 
 
-class TripPreferences:
-    origin: str | None
-    destination: str | None
-    start_month: str | None
-    daily_distance_km: float | None
-    accommodation: AccommodationPreference | None
-
-
 class AccommodationPreference:
     primary: AccommodationType
-    alt: AccommodationType | None = None
-    alt_every_n_nights: int | None = None
+    alt: Optional["AccommodationPreference"] = None
+    alt_every_n_nights: Optional[int] = None
     '''
         rules:
         if alt is not None, alt_every_n_nights must be set and must be > 2
         if alt is None, the system will treat as always prefer primary
     '''
+
+
+class TripPreferences:
+    origin: Optional[str] = None
+    destination: Optional[str] = None
+    start_month: Optional[str] = None
+    daily_distance_km: Optional[str] = None
+    accommodation: Optional[AccommodationPreference] = None
 
 
 class TripStateSummary:

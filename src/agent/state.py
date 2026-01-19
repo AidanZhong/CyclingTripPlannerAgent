@@ -7,6 +7,7 @@ Created on 16/01/2026 22:25
 @filename: state
 """
 from datetime import datetime
+from typing import Optional
 
 from src.schemas.trip import TripPreferences, TripPlan
 
@@ -19,7 +20,7 @@ class Message:
 class SessionState:
     preferences: TripPreferences
     history: list[Message]
-    last_plan: TripPlan | None = None
+    last_plan: Optional[TripPlan] = None
     last_tool_results: dict
     updated_at: datetime
 
