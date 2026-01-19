@@ -6,3 +6,6 @@ Created on 15/01/2026 22:22
 @project: CyclingTripPlannerAgent
 @filename: chat
 """
+from fastapi import APIRouter
+
+router = APIRouter()

@@ -6,25 +6,15 @@ Created on 16/01/2026 22:26
 @project: CyclingTripPlannerAgent
 @filename: api
 """
+from pydantic import BaseModel
 
 
-class ChatRequest:
+class ChatRequest(BaseModel):
     session_id: str
     message: str
     debug: bool = False
 
 
-class ChatResponse:
+class ChatResponse(BaseModel):
     session_id: str
     reply: str
-
-
-class DebugTrace:
-    decisions: list[str]
-    tools_called: list[ToolCallRecord]
-
-
-class ToolCallRecord:
-    tool_name: str
-    tool_input: str
-    tool_output: str
