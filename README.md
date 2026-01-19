@@ -14,7 +14,7 @@ step4: Run the local CLI or directly call the API endpoint
 
 to run the CLI execute:
 ```bash
-python chat_cli.py
+python src/chat_cli.py
 ```
 
 # Architecture decisions
