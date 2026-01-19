@@ -6,6 +6,10 @@ Created on 18/01/2026 16:55
 @project: CyclingTripPlannerAgent
 @filename: demo_data
 """
+from typing import List
+
+from src.utils.intent_matching import build_tfidf
+
 # demo city data
 CITY_DATA = {
     "Amsterdam": {"lat": 52.3676, "lon": 4.9041, "elevation_m": 14},
@@ -150,18 +154,48 @@ demo_weather_data = {
 }
 
 # a sample corpus used for demo
-CORPUS = [
-    ("I want to cycle from Amsterdam to Copenhagen", "PROVIDE_ROUTE"),
-    ("from Paris to Lyon", "PROVIDE_ROUTE"),
-    ("100km a day", "PROVIDE_DAILY_DISTANCE"),
-    ("I can do around 80 km/day", "PROVIDE_DAILY_DISTANCE"),
-    ("travelling in June", "PROVIDE_MONTH"),
-    ("in September", "PROVIDE_MONTH"),
-    ("prefer camping", "PROVIDE_ACCOMMODATION_PRIMARY"),
-    ("I want hotels", "PROVIDE_ACCOMMODATION_PRIMARY"),
-    ("hostel every 4th night", "PROVIDE_ACCOMMODATION_PATTERN"),
-    ("camping but a hostel every 4 nights", "PROVIDE_ACCOMMODATION_PATTERN"),
-    ("change to 80km/day", "CHANGE_DAILY_DISTANCE"),
-    ("actually make it 120km per day", "CHANGE_DAILY_DISTANCE"),
-    ("switch to hotels", "CHANGE_ACCOMMODATION"),
+INTENT_CORPUS: List[str] = [
+    "i want to cycle from X to Y",
+    "my route is from X to Y",
+    "plan a trip from X to Y",
+
+    "i can do about X km per day",
+    "around X km a day",
+    "my daily distance is X km",
+
+    "traveling in june",
+    "going in july",
+    "in august",
+
+    "i prefer camping",
+    "i want hostels",
+    "i prefer hotels",
+
+    "prefer camping but want a hostel every 4th night",
+    "hostel every 3 nights",
+    "hotel every 5th night",
 ]
+
+INTENT_LABELS: List[str] = [
+    "PROVIDE_ROUTE",
+    "PROVIDE_ROUTE",
+    "PROVIDE_ROUTE",
+
+    "PROVIDE_DAILY_DISTANCE",
+    "PROVIDE_DAILY_DISTANCE",
+    "CHANGE_DAILY_DISTANCE",
+
+    "PROVIDE_MONTH",
+    "PROVIDE_MONTH",
+    "PROVIDE_MONTH",
+
+    "PROVIDE_ACCOMMODATION_PRIMARY",
+    "PROVIDE_ACCOMMODATION_PRIMARY",
+    "PROVIDE_ACCOMMODATION_PRIMARY",
+
+    "PROVIDE_ACCOMMODATION_PATTERN",
+    "PROVIDE_ACCOMMODATION_PATTERN",
+    "PROVIDE_ACCOMMODATION_PATTERN",
+]
+
+VECTORIZE, CORPUS_VECS = build_tfidf(INTENT_CORPUS)
