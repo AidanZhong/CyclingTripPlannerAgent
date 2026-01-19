@@ -19,7 +19,8 @@ router = APIRouter()
 @router.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest) -> ChatResponse:
     session_id = request.session_id or str(uuid4())
-
-    response = handle_message(session_id, request.message)
-
-    return response
+    try:
+        response = handle_message(session_id, request.message)
+        return response
+    except Exception as e:
+        return ChatResponse(session_id=session_id, reply=str(e))

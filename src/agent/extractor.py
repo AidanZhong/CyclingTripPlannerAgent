@@ -88,14 +88,14 @@ def extract_daily_distance(text: str) -> Optional[int]:
     m = re.search(r"(\d{2,3})(?:\s*-\s*\d{2,3})?\s*km\s*(?:a\s*day|per\s*day|/day|daily)\b", low)
     if m:
         km = int(m.group(1))
-        if 10 <= km <= 300:
+        if 10 <= km <= 1000:
             return km
 
     # Reverse wording: "per day ... 100 km"
     m = re.search(r"(?:a\s*day|per\s*day|/day|daily).{0,20}?(\d{2,3})\s*km\b", low)
     if m:
         km = int(m.group(1))
-        if 10 <= km <= 300:
+        if 10 <= km <= 1000:
             return km
 
     return None

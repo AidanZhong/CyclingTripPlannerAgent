@@ -78,20 +78,40 @@ def build_trip_plan(preferences: TripPreferences, route_response: GetRouteRespon
 def segment_by_daily_target(waypoints: list[Waypoint], daily_distance_km):
     stops = [waypoints[0]]
     distances = []
-    current = 0.0
+    dis_today = 0.0
 
-    for i in range(1, len(waypoints)):
-        a, b = waypoints[i - 1], waypoints[i]
-        current += distance_between_city(a.name, b.name)
+    last_stop_idx = 0
 
-        if current >= daily_distance_km:
-            # we dont take this stop
-            stops.append(a)
-            distances.append(current)
-            current = 0.0
+    i = 1
+
+    while i in range(1, len(waypoints)):
+        prev, curr = waypoints[i - 1], waypoints[i]
+        dis_between_city = distance_between_city(prev.name, curr.name)
+
+        if dis_today + dis_between_city > daily_distance_km:
+            if i - 1 == last_stop_idx:
+                # at least move 1 city a day
+                dis_today += dis_between_city
+                stops.append(curr)
+                distances.append(dis_today)
+                last_stop_idx = i
+                dis_today = 0.0
+                i += 1
+                continue
+
+            # stop at last city before daily distance
+            distances.append(dis_today)
+            stops.append(prev)
+            dis_today = 0.0
+            last_stop_idx = i - 1
+            continue
+
+        dis_today += dis_between_city
+        i += 1
+
     if stops[-1] != waypoints[-1]:
         stops.append(waypoints[-1])
-    distances.append(current)
+    distances.append(dis_today)
     return stops, distances
 
 

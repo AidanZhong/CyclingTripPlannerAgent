@@ -35,3 +35,4 @@ of root folder.
 3. build frontend
 4. build database to replace the current in memory database
 5. add more functions like get_point_of_interest/ check_visa_requirements/ estimate_budgets
+6. Typo correction (e.g. typo of city names)

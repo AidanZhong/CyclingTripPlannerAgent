@@ -65,6 +65,7 @@ class DayPlan(BaseModel):
     terrain_difficulty: str
     weather_summary: str
     stay: str
+    stops: list[str] = []
 
 
 class TripPlan(BaseModel):
