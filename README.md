@@ -1,5 +1,21 @@
 # How to run locally
+Step 1: cd into the project folder
 
+Step 2: install the dependencies
+```bash
+pip install -r requirements.txt
+```
+step 3: run the FASTAPI server
+```bash
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8080
+```
+
+step4: Run the local CLI or directly call the API endpoint
+
+to run the CLI execute:
+```bash
+python chat_cli.py
+```
 
 # Architecture decisions
 I made an adjustment of the code structure which is folder "agent", "tools", "schemas" will be inside of the src instead
