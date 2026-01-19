@@ -1,13 +1,6 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from src.api.chat import router as chat_router
 
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+app = FastAPI(title="Cycling Trip Planner Agent")
+app.include_router(chat_router)
