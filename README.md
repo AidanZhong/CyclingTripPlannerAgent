@@ -1,4 +1,7 @@
 # How to run locally
+instruction video: https://drive.google.com/file/d/1ejNyebjvoYK6yBnuOq37Ip5OYfIw3EkR/view?usp=drive_link
+running demo video: https://drive.google.com/file/d/1ZQkv4ko_DPsa2jv2BVfs0nY14nwNsuAH/view?usp=drive_link
+
 Step 1: cd into the project folder
 
 Step 2: install the dependencies
