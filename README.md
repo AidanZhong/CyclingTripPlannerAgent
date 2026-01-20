@@ -3,7 +3,7 @@ Step 1: cd into the project folder
 
 Step 2: install the dependencies
 ```bash
-pip install -r requirements.txt
+python -m pip install --no-cache-dir --force-reinstall -r requirements.txt
 ```
 step 3: run the FASTAPI server
 ```bash
